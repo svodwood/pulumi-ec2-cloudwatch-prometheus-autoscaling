@@ -23,6 +23,13 @@ demo_target_group = lb.TargetGroup("demo-target-group",
     protocol="HTTP",
     vpc_id=demo_vpc.id,
     tags={**general_tags, "Name": "demo-alb"},
+    health_check=lb.TargetGroupHealthCheckArgs(
+        enabled=True,
+        healthy_threshold=3,
+        interval=10,
+        protocol="HTTP",
+        port="80"
+    ),
     opts=pulumi.ResourceOptions(parent=demo_alb)
 )
 

@@ -11,3 +11,5 @@ template:
         default: us-east-1
     aws:profile:
         description: AWS CLI profile name for the account
+    ssh-key-name:
+        description: An EC2 key pair name created prior
