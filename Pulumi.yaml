@@ -12,4 +12,4 @@ template:
     aws:profile:
         description: AWS CLI profile name for the account
     ssh-key-name:
-        description: An EC2 key pair name created prior
+        description: An EC2 key pair name created prior in the chosen region
