@@ -1,6 +1,6 @@
 from jinja2 import Template
 import json
-from pulumi_aws import ssm
+from pulumi_aws import ssm, cloudwatch
 from settings import cluster_name, general_tags, cwa_settings_parameter_path, cwa_prometheus_parameter_path 
 import yaml
 
@@ -132,4 +132,11 @@ demo_ssm_cwa_promscrape_configuration_parameter = ssm.Parameter("demo-cwa-prom-c
     name=cwa_prometheus_parameter_path,
     tags={**general_tags, "Name": "demo-cwa-prom-config"},
     value=demo_prometheus_configuration
+)
+
+# Create a CloudWatch log group for the prometheus metrics:
+demo_prom_loggroup = cloudwatch.LogGroup("demo-cwa-log-group",
+	name=f"{cluster_name}Prometheus",
+	retention_in_days=1,
+	tags={**general_tags, "Name": "demo-cwa-log-group"}
 )

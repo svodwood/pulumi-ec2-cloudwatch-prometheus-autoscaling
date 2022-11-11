@@ -6,7 +6,7 @@ from alb import demo_target_group
 import json
 
 """
-Creates EC2 configuration
+Creates EC2 configuration: launch template, autoscaling group and scaling policies
 """
 # Fetch a Amazon Linux 2 AMI
 demo_ami = ec2.get_ami(most_recent=True,
