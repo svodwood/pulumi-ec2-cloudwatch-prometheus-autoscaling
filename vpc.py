@@ -120,3 +120,12 @@ for i in range(2):
         destination_cidr_block="0.0.0.0/0",
         opts=pulumi.ResourceOptions(parent=demo_private_subnet)
     )
+
+# Create an S3 endpoint to save money on NAT traffic:
+demo_s3_endpoint = ec2.VpcEndpoint("demo-s3-endpoint",
+    vpc_id=demo_vpc.id,
+    service_name=f"com.amazonaws.{config.region}.s3",
+    vpc_endpoint_type="Interface",
+    subnet_ids=demo_private_subnets,
+    security_group_ids=[demo_sg.id],
+    tags={**general_tags, "Name": f"demo-s3-endpoint-{config.region}"})
