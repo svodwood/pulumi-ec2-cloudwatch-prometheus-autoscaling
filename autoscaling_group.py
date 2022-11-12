@@ -1,7 +1,7 @@
 from user_data import demo_webserver_user_data_b64
 from pulumi_aws import ec2, iam, autoscaling
 from settings import ssh_key_name, general_tags, cluster_name
-from vpc import demo_sg, demo_private_subnets
+from vpc import demo_sg, demo_private_subnets, demo_s3_endpoint
 from alb import demo_target_group
 import json
 from pulumi import ResourceOptions
@@ -76,7 +76,8 @@ demo_launch_template = ec2.LaunchTemplate("demo-launch-template",
     tag_specifications=[ec2.LaunchTemplateTagSpecificationArgs(
         resource_type="instance",
         tags={**general_tags, "Name": "demo-workload"}
-    )]
+    )],
+    opts=ResourceOptions(depends_on=[demo_s3_endpoint])
 )
 
 demo_autoscaling_group = autoscaling.Group("demo-autoscaling-group",
