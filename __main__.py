@@ -9,3 +9,4 @@ import cwa
 import nginx_config
 import user_data
 import autoscaling_group
+import scaling_policies

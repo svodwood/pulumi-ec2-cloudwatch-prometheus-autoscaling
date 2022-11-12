@@ -37,3 +37,8 @@ nginx_stub_status_config_parameter_path = f"/{cluster_name}/nginx_stub_status_co
 
 nginx_stub_status_port = "8113"
 nginx_config_file_path = "/etc/nginx/conf.d/nginx-status.conf"
+
+# Autoscaling policy targets:
+
+target_nginx_connections_waiting = 0.5
+target_openfs = 10
