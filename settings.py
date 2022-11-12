@@ -40,5 +40,5 @@ nginx_config_file_path = "/etc/nginx/conf.d/nginx-status.conf"
 
 # Autoscaling policy targets:
 
-target_nginx_connections_waiting = 0.5
+target_nginx_connections_waiting = 2
 target_node_sockstat_TCP_inuse = 50
