@@ -1,5 +1,5 @@
 from pulumi_aws import autoscaling
-from settings import cluster_name, target_nginx_connections_waiting, target_node_netstat_Tcp_CurrEstab
+from settings import cluster_name, target_nginx_connections_waiting, target_node_sockstat_TCP_inuse
 from autoscaling_group import demo_autoscaling_group
 
 """
@@ -35,7 +35,7 @@ netstat_tracking_policy = autoscaling.Policy("demo-netstat-tracking-policy",
     estimated_instance_warmup=10,
     policy_type="TargetTrackingScaling",
     target_tracking_configuration=autoscaling.PolicyTargetTrackingConfigurationArgs(
-        target_value=target_node_netstat_Tcp_CurrEstab,
+        target_value=target_node_sockstat_TCP_inuse,
         disable_scale_in=False,
         customized_metric_specification=autoscaling.PolicyTargetTrackingConfigurationCustomizedMetricSpecificationArgs(
             metric_name="node_netstat_Tcp_CurrEstab",
