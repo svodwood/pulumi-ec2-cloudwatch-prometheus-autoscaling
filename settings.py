@@ -41,4 +41,4 @@ nginx_config_file_path = "/etc/nginx/conf.d/nginx-status.conf"
 # Autoscaling policy targets:
 
 target_nginx_connections_waiting = 0.5
-target_openfs = 10
+target_node_netstat_Tcp_CurrEstab = 50

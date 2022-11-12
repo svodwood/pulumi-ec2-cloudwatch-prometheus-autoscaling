@@ -4,6 +4,7 @@ from settings import ssh_key_name, general_tags, cluster_name
 from vpc import demo_sg, demo_private_subnets
 from alb import demo_target_group
 import json
+from pulumi import ResourceOptions
 
 """
 Creates EC2 configuration: launch template, autoscaling group and scaling policies
@@ -79,7 +80,7 @@ demo_launch_template = ec2.LaunchTemplate("demo-launch-template",
 )
 
 demo_autoscaling_group = autoscaling.Group("demo-autoscaling-group",
-    max_size=4,
+    max_size=8,
     min_size=2,
     name=cluster_name,
     enabled_metrics=["GroupMinSize","GroupMaxSize","GroupDesiredCapacity","GroupInServiceInstances","GroupPendingInstances","GroupStandbyInstances","GroupTerminatingInstances","GroupTotalInstances"],
@@ -100,7 +101,8 @@ demo_autoscaling_group = autoscaling.Group("demo-autoscaling-group",
         key="Name",
         value="demo-workload-node",
         propagate_at_launch=True
-    )]
+    )],
+    opts=ResourceOptions(ignore_changes=["target_group_arns"])
 )
 
 demo_autoscaling_group_attachment = autoscaling.Attachment("demo-autoscaling-attachment",

@@ -23,7 +23,7 @@ demo_cwa_configuration = json.dumps({
 					"metric_declaration_dedup":True,
 					"metric_namespace":f"{cluster_name}_Prometheus",
 					"metric_unit":{
-						"process_open_fds":"Count",
+						"node_netstat_Tcp_CurrEstab":"Count",
 						"nginx_connections_waiting":"Count"
 					},
 					"metric_declaration":[
@@ -42,7 +42,7 @@ demo_cwa_configuration = json.dumps({
 								]
 							],
 							"metric_selectors":[
-								"^process_open_fds$"
+								"^node_netstat_Tcp_CurrEstab$"
 							]
 						},
 						{
